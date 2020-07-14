@@ -1,5 +1,7 @@
+import { AppState } from './../../app.reducers';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-
+import { Store } from '@ngrx/store';
+import * as actions from './../contador.actions';
 @Component({
   selector: 'app-neto',
   templateUrl: './neto.component.html',
@@ -11,15 +13,16 @@ export class NetoComponent implements OnInit {
   @Input() contador: number;
   @Output() contadorCambio = new EventEmitter<number>();
 
-  constructor() { }
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
+    this.store.select('contador')
+      .subscribe(contador => this.contador = contador);
   }
 
   // tslint:disable-next-line: typedef
-  reset(){
-    this.contador = 0;
-    this.contadorCambio.emit(0);
+  reset() {
+    this.store.dispatch(actions.reset({ numero: 0 }));
   }
 
 }

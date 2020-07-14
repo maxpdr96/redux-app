@@ -1,4 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { AppState } from './../../app.reducers';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import * as actions from './../contador.actions';
 
 @Component({
   selector: 'app-filho',
@@ -8,28 +11,23 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class FilhoComponent implements OnInit {
 
-  @Input() contador: number;
-  @Output() cambioContador = new EventEmitter<number>();
-  constructor() { }
+  contador: number;
+
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
+    this.store.select('contador')
+      .subscribe(contador => this.contador = contador);
   }
 
   // tslint:disable-next-line: typedef
-  multiplicar(){
-    this.contador *= 2;
-    this.cambioContador.emit(this.contador);
+  multiplicar() {
+    this.store.dispatch(actions.multiplicar({ numero: 2 }));
   }
 
   // tslint:disable-next-line: typedef
-  dividir(){
-    this.contador /= 2;
-    this.cambioContador.emit(this.contador);
+  dividir() {
+    this.store.dispatch(actions.dividir({ numero: 2 }));
   }
 
-  // tslint:disable-next-line: typedef
-  resetNeto( novoContador ){
-    this.contador = novoContador;
-    this.cambioContador.emit(this.contador);
-  }
 }

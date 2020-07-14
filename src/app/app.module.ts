@@ -25,7 +25,7 @@ import { FilhoComponent } from './contador/filho/filho.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({ contador: contadorReducer}),
+    StoreModule.forRoot({ contador: contadorReducer }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production
