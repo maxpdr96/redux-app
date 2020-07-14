@@ -12,10 +12,12 @@ export class AppComponent {
     this.contador = 10;
   }
 
+  // tslint:disable-next-line: typedef
   incrementar(){
     this.contador++;
   }
 
+  // tslint:disable-next-line: typedef
   decrementar(){
     this.contador--;
   }
