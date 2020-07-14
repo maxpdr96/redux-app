@@ -120,6 +120,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "redux-app"
+    }
+  },
+  "defaultProject": "redux-app",
+  "cli": {
+    "analytics": false
+  }
 }
